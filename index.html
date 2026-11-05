@@ -108,20 +108,8 @@ h1,h2,h3{font-family:var(--f-display);font-weight:800;letter-spacing:-.05em;line
 #wall .row.ol span{color:transparent;-webkit-text-stroke:1px rgba(var(--dot),.24)}
 @keyframes wallin{to{opacity:1}}
 @keyframes wallrun{to{transform:translateX(-50%)}}
-#lan{position:absolute;top:0;left:50%;width:var(--cw);margin-left:calc(var(--cw)/-2);transform-origin:50% 0;z-index:3;will-change:transform}
-.hang{position:relative;padding-top:clamp(56px,12vh,120px);animation:drop 1.4s .35s both}
-@keyframes drop{
-  0%{transform:translateY(-125%);animation-timing-function:cubic-bezier(.5,0,.9,.5)}
-  46%{transform:translateY(0);animation-timing-function:cubic-bezier(.2,.6,.4,1)}
-  62%{transform:translateY(-8%);animation-timing-function:cubic-bezier(.5,0,.9,.5)}
-  76%{transform:translateY(0);animation-timing-function:cubic-bezier(.2,.6,.4,1)}
-  87%{transform:translateY(-2.4%);animation-timing-function:cubic-bezier(.5,0,.9,.5)}
-  100%{transform:translateY(0)}}
-.strap{position:absolute;left:50%;top:-400px;bottom:calc(100% - clamp(56px,12vh,120px) - 34px);width:26px;margin-left:-13px;background:var(--inv);border-radius:3px;
-  background-image:repeating-linear-gradient(180deg,transparent 0 22px,rgba(128,128,128,.28) 22px 24px)}
-.strap::after{content:"";position:absolute;left:3px;right:3px;top:0;bottom:0;border-inline:1px solid rgba(128,128,128,.4)}
-.clip{position:absolute;left:50%;top:calc(clamp(56px,12vh,120px) - 6px);width:44px;height:28px;margin-left:-22px;border-radius:8px 8px 4px 4px;background:var(--line2);border:1px solid var(--muted);z-index:2}
-.idcard{position:relative;width:100%;height:calc(var(--cw)*1.62);border-radius:22px;background:var(--inv);color:var(--inv-ink);padding:calc(var(--cw)*.075);display:flex;flex-direction:column;gap:calc(var(--cw)*.04);cursor:grab;touch-action:none;overflow:hidden;
+#lanc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
+.idcard{position:absolute;left:0;top:0;transform-origin:0 0;transform:translate(-9999px,0);will-change:transform;z-index:3;width:var(--cw);height:calc(var(--cw)*1.62);border-radius:22px;background:var(--inv);color:var(--inv-ink);padding:calc(var(--cw)*.075);display:flex;flex-direction:column;gap:calc(var(--cw)*.04);cursor:grab;touch-action:none;overflow:hidden;
   box-shadow:0 36px 60px -30px rgba(0,0,0,.6),0 0 0 1px rgba(128,128,128,.3)}
 .idcard:active{cursor:grabbing}
 .idcard::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-120%);animation:sheen 3.8s 1.8s ease-in-out infinite;pointer-events:none;mix-blend-mode:overlay}
@@ -204,40 +192,6 @@ body.ready .view.active h1 .ch{animation:letter .9s var(--ease) both;animation-d
 .mi:active{transform:scale(.97)}
 .mi .rip{display:none}
 
-
-/* menu styles: text (default), full screen, cards */
-.fmwrap{display:none;margin-top:clamp(14px,3vh,28px)}
-body[data-menu="full"] .tmenu{display:none}
-body[data-menu="full"] .fmwrap{display:block}
-body[data-menu="cards"] .tmenu{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-body[data-menu="cards"] .mi{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:.15rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(12px,2.2vh,18px) 16px;min-height:clamp(70px,10.5vh,98px);transition:border-color .25s,opacity .35s,transform .25s}
-body[data-menu="cards"] .mi .ml{order:-1}
-body[data-menu="cards"] .mi .mt{font-size:clamp(1.05rem,2.4vw,1.45rem);transform:none!important}
-body[data-menu="cards"] .mi .ml{transform:none!important}
-body[data-menu="cards"] .mi .ma{position:absolute;right:14px;top:10px;margin:0;opacity:.45;transform:none;transition:transform .35s var(--ease),opacity .25s}
-body[data-menu="cards"] .mi:hover .ma{transform:translate(4px,-4px);opacity:1}
-body[data-menu="cards"] .mi::after{display:none}
-body[data-menu="cards"] .mi:hover{border-color:var(--fg)}
-body[data-menu="cards"] .tmenu:hover .mi:not(:hover){opacity:1}
-body.ready .view .tmenu.swap .mi{animation:swapin .6s var(--ease) backwards;animation-delay:calc((var(--i) - 3)*60ms)}
-@keyframes swapin{from{opacity:0;transform:translateY(22px) scale(.94)}to{opacity:1;transform:none}}
-.mstyle{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:clamp(12px,2.4vh,22px)}
-.mstyle .seg{margin:0}
-#fm{position:fixed;inset:0;z-index:70;background:color-mix(in srgb,var(--bg) 93%,transparent);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);visibility:hidden;pointer-events:none;
-  clip-path:circle(0px at var(--cx,50%) var(--cy,50%));transition:clip-path .75s cubic-bezier(.77,0,.18,1),visibility 0s .75s;
-  display:flex;flex-direction:column;padding:max(18px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(18px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
-#fm.open{visibility:visible;pointer-events:auto;clip-path:circle(150vmax at var(--cx,50%) var(--cy,50%));transition:clip-path .75s cubic-bezier(.77,0,.18,1),visibility 0s}
-.fm-top{display:flex;justify-content:space-between;align-items:center;max-width:1080px;width:100%;margin:0 auto}
-.fm-list{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1080px;width:100%;margin:0 auto}
-.fi{display:flex;align-items:baseline;gap:1rem;background:none;border:0;padding:0;text-align:left;cursor:pointer;color:var(--fg);overflow:hidden;position:relative;transition:opacity .3s}
-.fi .fw{display:block;font-weight:800;letter-spacing:-.06em;line-height:1.08;font-size:clamp(2.2rem,9.4vh,6rem);transform:translateY(110%);transition:transform .8s var(--ease);transition-delay:0s;padding-bottom:.04em}
-.fi .fl{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .5s}
-.fm-list:hover .fi:not(:hover){opacity:.3}
-.fi:hover .fw{-webkit-text-stroke:0;letter-spacing:-.04em}
-#fm.open .fi .fw{transform:none;transition-delay:calc(var(--i)*70ms + .3s)}
-#fm.open .fi .fl{opacity:1;transition-delay:calc(var(--i)*70ms + .7s)}
-.fm-foot{text-align:center;margin:0}
-@media (max-width:760px){body[data-menu="cards"] .tmenu{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* segmented control */
 .seg{display:inline-flex;max-width:100%;gap:4px;padding:5px;border:1px solid var(--line2);border-radius:999px;position:relative;overflow-x:auto;scrollbar-width:none;margin:.2rem 0 1rem}
@@ -345,36 +299,19 @@ body.ready .view .tmenu.swap .mi{animation:swapin .6s var(--ease) backwards;anim
 <div id="intro" role="dialog" aria-label="Welcome">
   <div id="wall" aria-hidden="true"></div>
   <div class="top"><span class="label">Portfolio · 2026</span><span class="btns"><button class="snd-btn" type="button" aria-label="Sound on or off" title="Sound"><span>♪</span></button><button class="theme-btn" type="button" aria-label="Switch light or dark theme" title="Switch theme"><span>◐</span></button></span></div>
-  <div id="lan">
-    <div class="hang">
-      <div class="strap"></div><div class="clip"></div>
-      <div class="idcard" id="idcard" aria-label="Portfolio ID card of John Rain Lutong">
-        <span class="slot"></span>
-        <div class="row1"><span>Portfolio ID</span><span>2026</span></div>
-        <div class="face"><img id="cardimg" alt="Portrait of John Rain Lutong" draggable="false"></div>
-        <h2 class="nm2" aria-label="John Rain Lutong"><span>John Rain</span><span>Lutong</span></h2>
-        <div class="meta"><div><b>BS Computer Science</b>Univ. of the Cordilleras</div><div class="bars" aria-hidden="true"></div></div>
-      </div>
-    </div>
+  <canvas id="lanc" aria-hidden="true"></canvas>
+  <div class="idcard" id="idcard" aria-label="Portfolio ID card of John Rain Lutong">
+    <span class="slot"></span>
+    <div class="row1"><span>Portfolio ID</span><span>2026</span></div>
+    <div class="face"><img id="cardimg" alt="Portrait of John Rain Lutong" draggable="false"></div>
+    <h2 class="nm2" aria-label="John Rain Lutong"><span>John Rain</span><span>Lutong</span></h2>
+    <div class="meta"><div><b>BS Computer Science</b>Univ. of the Cordilleras</div><div class="bars" aria-hidden="true"></div></div>
   </div>
   <div class="enter">
     <button class="btn pri" id="go" type="button" data-rip>Enter portfolio →</button>
     <p class="hint">Drag the card</p>
     <div class="prog" aria-hidden="true"><i></i></div>
   </div>
-</div>
-
-<div id="fm" role="dialog" aria-label="Menu" aria-hidden="true">
-  <div class="fm-top"><span class="label">Menu</span><button class="btn mini" id="fmclose" type="button" data-rip>Close ✕</button></div>
-  <nav class="fm-list">
-    <button class="fi" type="button" data-go="about" data-rip style="--i:0"><span class="fw">About me</span><span class="fl">Who I am</span></button>
-    <button class="fi" type="button" data-go="skills" data-rip style="--i:1"><span class="fw">Skills</span><span class="fl">12 hands-on</span></button>
-    <button class="fi" type="button" data-go="bench" data-rip style="--i:2"><span class="fw">On the bench</span><span class="fl">How I think</span></button>
-    <button class="fi" type="button" data-go="journey" data-rip style="--i:3"><span class="fw">Journey</span><span class="fl">Newest first</span></button>
-    <button class="fi" type="button" data-go="credentials" data-rip style="--i:4"><span class="fw">Credentials</span><span class="fl">CSS NCII</span></button>
-    <button class="fi" type="button" data-go="contact" data-rip style="--i:5"><span class="fw">Contact</span><span class="fl">Let's talk</span></button>
-  </nav>
-  <p class="label fm-foot">John Rain Lutong · 2026</p>
 </div>
 
 <div id="app">
@@ -415,13 +352,6 @@ body.ready .view .tmenu.swap .mi{animation:swapin .6s var(--ease) backwards;anim
           <button class="mi" type="button" data-go="credentials" data-rip data-s style="--i:7"><span class="mt">Credentials</span><span class="ml">CSS NCII</span><span class="ma">→</span></button>
           <button class="mi" type="button" data-go="contact" data-rip data-s style="--i:8"><span class="mt">Contact</span><span class="ml">Let's talk</span><span class="ma">→</span></button>
         </nav>
-        <div class="fmwrap" data-s style="--i:4"><button class="btn pri" id="fmbtn" type="button" data-rip>Open menu +</button></div>
-        <div class="mstyle" data-s style="--i:9"><span class="label">Menu style</span>
-          <div class="seg" id="mstyle" role="tablist"><span class="ind"></span>
-            <button type="button" role="tab" data-rip data-t="text" aria-selected="true">Text</button>
-            <button type="button" role="tab" data-rip data-t="full" aria-selected="false">Full screen</button>
-            <button type="button" role="tab" data-rip data-t="cards" aria-selected="false">Cards</button>
-          </div></div>
       </div>
     </section>
 
@@ -706,31 +636,90 @@ body.ready .view .tmenu.swap .mi{animation:swapin .6s var(--ease) backwards;anim
     var t = ""; for (var q = 0; q < 12; q++) t += "<span>" + TXT + " —</span>";
     row.innerHTML = t; wall.appendChild(row);
   }
-  var lan = $("#lan"), card = $("#idcard"), th = 0, vel = 0, drag = false, last = 0, lastT = 0;
-  function swing(now){
-    if (!running) return;
-    var dt = Math.min(.033, (now - (last || now))/1000); last = now;
-    if (!drag){ vel += (-9*Math.sin(th) - 0.55*vel)*dt; th += vel*dt; }
-    lan.style.transform = "rotate(" + th + "rad)";
-    requestAnimationFrame(swing);
+  /* realistic lanyard: a stretchy strap (mass-spring chain) holds a swinging card. It drops from above, snaps taut, bounces and swings. */
+  var lanc = $("#lanc"), lcx = lanc.getContext("2d"), card = $("#idcard"), intro = $("#intro");
+  var N = 10, G = 2000, DTS = 1/900, K_LINK = 60000, C_LINK = 300, K_ROD = 400000, C_ROD = 1000;
+  var LW = 0, LH = 0, LD = 1, cwid = 0, chei = 0, l0 = 0, Lr = 0, ancX = 0, A0 = 0, AF = -40, simT = 0, last = 0, P = [], dragS = null, tDelay = .35, tDrop = .9;
+  function resetLan(settled){
+    LD = Math.min(2, window.devicePixelRatio || 1); LW = lanc.clientWidth; LH = lanc.clientHeight; if (!LW) return;
+    lanc.width = LW*LD; lanc.height = LH*LD; lcx.setTransform(LD,0,0,LD,0,0);
+    cwid = card.offsetWidth; chei = card.offsetHeight;
+    Lr = Math.max(56, Math.min(120, innerHeight*.12)) + 40; l0 = Lr/N; ancX = LW/2; AF = -40; A0 = -(Lr + chei + 60);
+    var y0 = settled ? AF : A0; P = [];
+    for (var i = 0; i <= N; i++) P.push({x:ancX, y:y0 + i*l0, vx:0, vy:0, m: i === N ? 5 : .8});
+    var tilt = settled ? 0 : .13, T = P[N];
+    P.push({x:T.x + Math.sin(tilt)*chei, y:T.y + Math.cos(tilt)*chei, vx:0, vy:0, m:5});
+    simT = settled ? 99 : 0; dragS = null;
   }
-  if (!reduce) {
-    requestAnimationFrame(swing);
-    setTimeout(function(){ vel = 1.5; }, 1250);
+  function anchorY(t){
+    if (t <= tDelay) return A0; if (t >= tDelay + tDrop) return AF;
+    var s2 = (t - tDelay)/tDrop, m1 = .96; return A0 + (AF - A0)*(s2*s2*s2*(m1-2) + s2*s2*(3-m1));
+  }
+  function spring(a, b, rest, k, c, tensionOnly){
+    var dx = b.x-a.x, dy = b.y-a.y, d = Math.sqrt(dx*dx+dy*dy) || 1e-6, nx = dx/d, ny = dy/d;
+    if (tensionOnly && d <= rest) return;
+    var rv = (b.vx-a.vx)*nx + (b.vy-a.vy)*ny, f = k*(d-rest) + c*rv; if (tensionOnly && f < 0) f = 0;
+    a.fx += f*nx; a.fy += f*ny; b.fx -= f*nx; b.fy -= f*ny;
+  }
+  function stepPhys(dt){
+    var B = P[N+1], T = P[N], i;
+    for (i = 1; i <= N+1; i++){ P[i].fx = 0; P[i].fy = P[i].m*G; }
+    P[0].x = ancX; P[0].y = anchorY(simT); P[0].vx = P[0].vy = 0;
+    for (i = 0; i < N; i++) spring(P[i], P[i+1], l0, K_LINK, C_LINK, true);
+    spring(T, B, chei, K_ROD, C_ROD, false);
+    T.fx += Math.sin(simT*.8)*10; B.fx += Math.sin(simT*.8 + .6)*16;
+    if (dragS){
+      var vx = B.x-T.x, vy = B.y-T.y, r = dragS.r, gx = T.x + vx*r, gy = T.y + vy*r;
+      var fx = 6000*(dragS.x-gx), fy = 6000*(dragS.y-gy), gvx = T.vx*(1-r)+B.vx*r, gvy = T.vy*(1-r)+B.vy*r; fx -= 380*gvx; fy -= 380*gvy;
+      T.fx += fx*(1-r); T.fy += fy*(1-r); B.fx += fx*r; B.fy += fy*r;
+    }
+    for (i = 1; i <= N+1; i++){
+      var n = P[i], drag = i === N+1 ? 2.4 : (i === N ? .8 : .5);
+      n.vx += n.fx/n.m*dt; n.vy += n.fy/n.m*dt; var damp = Math.max(0, 1 - drag*dt); n.vx *= damp; n.vy *= damp;
+      n.x += n.vx*dt; n.y += n.vy*dt;
+    }
+    simT += dt;
+  }
+  function drawLan(){
+    var cs = getComputedStyle(intro), inv = cs.getPropertyValue("--inv").trim() || "#f5f6f8";
+    lcx.clearRect(0,0,LW,LH); var w = Math.max(20, Math.min(28, cwid*.085));
+    lcx.lineJoin = "round"; lcx.lineCap = "butt";
+    function path(){ lcx.beginPath(); lcx.moveTo(P[0].x, P[0].y); for (var i = 1; i < N; i++){ var mx = (P[i].x+P[i+1].x)/2, my = (P[i].y+P[i+1].y)/2; lcx.quadraticCurveTo(P[i].x, P[i].y, mx, my); } lcx.lineTo(P[N].x, P[N].y); }
+    lcx.setLineDash([]); lcx.strokeStyle = "rgba(0,0,0,.28)"; lcx.lineWidth = w + 2; path(); lcx.stroke();
+    lcx.strokeStyle = inv; lcx.lineWidth = w; path(); lcx.stroke();
+    lcx.setLineDash([2, 17]); lcx.strokeStyle = "rgba(128,128,128,.34)"; lcx.lineWidth = w - 1; path(); lcx.stroke(); lcx.setLineDash([]);
+    var T = P[N], B = P[N+1], vx = B.x-T.x, vy = B.y-T.y, th = Math.atan2(-vx, vy);
+    card.style.transform = "translate("+T.x.toFixed(2)+"px,"+T.y.toFixed(2)+"px) rotate("+th.toFixed(4)+"rad) translate("+(-cwid/2).toFixed(1)+"px,0)";
+    lcx.save(); lcx.translate(T.x, T.y); lcx.rotate(th);
+    lcx.fillStyle = "#9aa1b2"; lcx.strokeStyle = "rgba(0,0,0,.4)"; lcx.lineWidth = 1;
+    lcx.beginPath(); lcx.roundRect ? lcx.roundRect(-23, -15, 46, 34, 8) : lcx.rect(-23, -15, 46, 34); lcx.fill(); lcx.stroke();
+    lcx.fillStyle = "rgba(0,0,0,.45)"; lcx.beginPath(); lcx.roundRect ? lcx.roundRect(-11, 4, 22, 7, 3.5) : lcx.rect(-11, 4, 22, 7); lcx.fill();
+    lcx.restore();
+  }
+  function frameLan(now){
+    if (!running) return;
+    var dt = Math.min(1/30, (now - (last || now))/1000); last = now;
+    var steps = Math.ceil(dt/DTS); for (var s3 = 0; s3 < steps; s3++) stepPhys(dt/steps);
+    drawLan(); requestAnimationFrame(frameLan);
+  }
+  resetLan(reduce);
+  if (reduce){ for (var z = 0; z < 5400; z++) stepPhys(DTS); drawLan(); }
+  else { drawLan(); requestAnimationFrame(frameLan); }
+  var lastW = innerWidth; addEventListener("resize", function(){ if (Math.abs(innerWidth - lastW) > 2){ lastW = innerWidth; resetLan(true); if (reduce) drawLan(); } else if (lanc.clientHeight !== LH){ var keep = P; resetLan(true); } });
+  if (!reduce){
     card.addEventListener("pointerdown", function(e){
-      drag = true; vel = 0; card.setPointerCapture(e.pointerId); lastT = performance.now(); e.preventDefault();
+      var T = P[N], B = P[N+1], vx = B.x-T.x, vy = B.y-T.y, den = vx*vx+vy*vy || 1, r = ((e.clientX-T.x)*vx + (e.clientY-T.y)*vy)/den;
+      dragS = {r:Math.max(.18, Math.min(1, r)), x:e.clientX, y:e.clientY}; card.setPointerCapture(e.pointerId); e.preventDefault();
     });
     card.addEventListener("pointermove", function(e){
-      if (!drag) return;
-      var ax = innerWidth/2, ay = 0, n = Math.atan2(e.clientX - ax, Math.max(60, e.clientY - ay));
-      n = Math.max(-1.1, Math.min(1.1, n)); var now = performance.now(), dt = Math.max(.008,(now-lastT)/1000);
-      vel = (n - th)/dt; th = n; lastT = now; vel = Math.max(-6, Math.min(6, vel));
+      if (!dragS) return; var dx = e.clientX-ancX, dy = e.clientY-AF, d = Math.hypot(dx,dy), mx = Lr + chei*.85, k = d > mx ? mx/d : 1;
+      dragS.x = ancX + dx*k; dragS.y = AF + dy*k;
     });
-    function rel(){ drag = false; }
+    function rel(){ dragS = null; }
     card.addEventListener("pointerup", rel); card.addEventListener("pointercancel", rel);
   }
 
-  var intro = $("#intro"), opened = false;
+  var opened = false;
   function openSite(){
     if (opened) return; opened = true; play("enter");
     intro.classList.add("out"); document.body.classList.add("ready"); place(true); setTimeout(updateFade, 200); setTimeout(updateFade, 1400);
@@ -784,11 +773,11 @@ body.ready .view .tmenu.swap .mi{animation:swapin .6s var(--ease) backwards;anim
   }
   document.addEventListener("click", function(e){
     var t = e.target.closest && e.target.closest("[data-go]"); if (!t) return;
-    e.preventDefault(); e.stopPropagation(); go(t.dataset.go, {clientX:e.clientX,clientY:e.clientY,currentTarget:t}); closeFm();
+    e.preventDefault(); e.stopPropagation(); go(t.dataset.go, {clientX:e.clientX,clientY:e.clientY,currentTarget:t});
   });
   addEventListener("hashchange", function(){ var h = location.hash.slice(1); show(order.indexOf(h) >= 0 ? h : "home"); });
   addEventListener("keydown", function(e){
-    if (!opened) return; if (e.key === "Escape" && fm.classList.contains("open")){ closeFm(); play("back"); return; } var i = order.indexOf(cur);
+    if (!opened) return; var i = order.indexOf(cur);
     if (e.key === "ArrowRight" && i < order.length-1) go(order[i+1]);
     else if (e.key === "ArrowLeft" && i > 0) go(order[i-1]);
     else if (e.key === "Escape" && cur !== "home") go("home");
@@ -842,26 +831,6 @@ body.ready .view .tmenu.swap .mi{animation:swapin .6s var(--ease) backwards;anim
   $(".orbit").addEventListener("pointerover", function(e){ if (e.pointerType !== "mouse") return; var n = e.target.closest(".node"); if (n && n !== lastHover){ lastHover = n; play("hover"); } });
   $(".orbit").addEventListener("pointerleave", function(){ lastHover = null; });
 
-
-  /* ---------- full-screen menu ---------- */
-  var fm = $("#fm");
-  function openFm(x,y){ fm.style.setProperty("--cx", x+"px"); fm.style.setProperty("--cy", y+"px"); fm.classList.add("open"); fm.setAttribute("aria-hidden","false"); play("open"); }
-  function closeFm(){ if (!fm.classList.contains("open")) return; fm.classList.remove("open"); fm.setAttribute("aria-hidden","true"); }
-  $("#fmbtn").addEventListener("click", function(e){ openFm(e.clientX || innerWidth/2, e.clientY || innerHeight/2); });
-  $("#fmclose").addEventListener("click", function(e){ closeFm(); play("back"); });
-
-  /* ---------- menu style switcher (saved) ---------- */
-  var mstyle = "text", MK = "jr-menustyle";
-  try { var ms = localStorage.getItem(MK); if (ms === "full" || ms === "cards") mstyle = ms; } catch(e){}
-  document.body.dataset.menu = mstyle;
-  var mseg = $("#mstyle");
-  $$("button", mseg).forEach(function(b){ b.setAttribute("aria-selected", b.dataset.t === mstyle); });
-  seg(mseg, function(t){
-    mstyle = t; document.body.dataset.menu = t; try { localStorage.setItem(MK, t); } catch(e){}
-    var tm2 = $(".tmenu"); tm2.classList.remove("swap"); void tm2.offsetWidth; tm2.classList.add("swap");
-    if (t !== "full") closeFm(); setTimeout(updateFade, 120); setTimeout(updateFade, 800);
-  });
-  setTimeout(function(){ indTo(mseg, $('[aria-selected="true"]', mseg)); }, 80);
 
   /* ---------- skills ---------- */
   var cats = {all:{label:"Everything",note:"All twelve, from the bench to the network."},hw:{label:"Hardware",note:"I like opening machines up and putting them back together."},sw:{label:"Software",note:"Getting a computer from blank drive to ready to use."},net:{label:"Network",note:"Connecting machines, from the cable to the configuration."},sup:{label:"Support",note:"Finding what's wrong, fixing it, and keeping data safe."}};
