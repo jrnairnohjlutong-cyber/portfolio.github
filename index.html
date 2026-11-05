@@ -259,6 +259,14 @@ body.ready .view.active h1 .ch{animation:letter .9s var(--ease) both;animation-d
 .langs{display:flex;flex-wrap:wrap;gap:10px}
 .lang{font-weight:600;letter-spacing:-.02em;font-size:1.05rem;padding:.7rem 1.3rem;border-radius:999px;border:1px solid var(--line2);transition:background .25s,color .25s,transform .3s var(--ease)}
 .lang:hover{background:var(--fg);color:var(--bg);transform:translateY(-3px) rotate(-2deg)}
+button.lang{background:transparent;color:inherit;cursor:pointer;font-family:inherit;position:relative;overflow:hidden}
+.lang[aria-pressed="true"]{background:var(--inv);color:var(--inv-ink);border-color:var(--inv)}
+.lgbox{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line)}
+.lgbox.swap{animation:lgin .55s var(--ease) both}
+.lgbox .lgm{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0}
+.lgbox h3{font-size:clamp(1.4rem,3.6vw,2rem);margin:.3rem 0 .5rem}
+.lgbox #lgd{margin:0;max-width:62ch;color:var(--muted);font-size:.95rem;line-height:1.55}
+@keyframes lgin{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:1.2rem}
 
 /* dock */
@@ -443,7 +451,16 @@ body.ready .view.active h1 .ch{animation:letter .9s var(--ease) both;animation-d
         </div>
         <div class="pane on" data-pane="cert"><div class="card" data-p style="--i:0"><p class="label">Certification · 2025</p><h3>CSS NCII</h3><p>National Certificate II in Computer Systems Servicing, earned in 2025.</p></div></div>
         <div class="pane" data-pane="exp"><div class="card" data-p style="--i:0"><p class="label">Experience</p><h3>Work Immersion</h3><p>Luis Hora Memorial Hospital, my first experience applying what I learned in a real workplace.</p></div></div>
-        <div class="pane" data-pane="lang"><div class="card"><p class="label" data-p style="--i:0">Languages I speak</p><div class="langs" style="margin-top:1rem"><span class="lang" data-p style="--i:1">Filipino</span><span class="lang" data-p style="--i:2">English</span><span class="lang" data-p style="--i:3">Ilocano</span><span class="lang" data-p style="--i:4">Kankana-ey</span></div></div></div>
+        <div class="pane" data-pane="lang"><div class="card">
+          <p class="label" data-p style="--i:0">Languages I speak · tap one to read its origin</p>
+          <div class="langs" id="langs" data-p style="--i:1">
+            <button class="lang" type="button" data-rip data-k="fil" aria-pressed="true">Filipino</button>
+            <button class="lang" type="button" data-rip data-k="eng" aria-pressed="false">English</button>
+            <button class="lang" type="button" data-rip data-k="ilo" aria-pressed="false">Ilocano</button>
+            <button class="lang" type="button" data-rip data-k="kan" aria-pressed="false">Kankana-ey</button>
+          </div>
+          <div class="lgbox" id="lgbox" aria-live="polite"><p class="lgm" id="lgm"></p><h3 id="lgt"></h3><p id="lgd"></p></div>
+        </div></div>
       </div>
     </section>
 
@@ -831,6 +848,22 @@ body.ready .view.active h1 .ch{animation:letter .9s var(--ease) both;animation-d
   $(".orbit").addEventListener("pointerover", function(e){ if (e.pointerType !== "mouse") return; var n = e.target.closest(".node"); if (n && n !== lastHover){ lastHover = n; play("hover"); } });
   $(".orbit").addEventListener("pointerleave", function(){ lastHover = null; });
 
+
+  /* ---------- languages: origins ---------- */
+  var LANGS = {
+    fil:{t:"Filipino", m:"National language · Austronesian", d:"The national language of the Philippines. It is built mainly on Tagalog, which comes from the Manila region and southern Luzon. Tagalog was chosen as the base of a national language in 1937, was later called Pilipino, and is named Filipino in the 1987 Constitution. It has taken in many words from Spanish, English and Chinese."},
+    eng:{t:"English", m:"West Germanic · England", d:"English began in England, brought by Germanic settlers (the Angles, Saxons and Jutes) around the 5th century. It was later shaped by Old Norse and Norman French. It came to the Philippines with American rule and public schools in the early 1900s, and today it is an official language alongside Filipino."},
+    ilo:{t:"Ilocano", m:"Austronesian · Ilocos Region", d:"Ilocano, or Ilokano, comes from the Ilocos region on the northwest coast of Luzon, in Ilocos Norte, Ilocos Sur and La Union. Its name is commonly explained as \u201cpeople of the cove\u201d. Ilocano speakers later settled across the Cordillera, Cagayan Valley, Central Luzon and Mindanao, which is why it is one of the major languages of the Philippines."},
+    kan:{t:"Kankana-ey", m:"Austronesian · Cordillera", d:"Kankana-ey is the language of the Kankanaey people, an indigenous group of the Cordillera mountains in Northern Luzon. It is spoken in Benguet and the western part of Mountain Province, in towns such as Bauko, Sagada and Besao. It has been passed down mostly by speaking, from one generation of mountain communities to the next."}
+  };
+  var lgbox = $("#lgbox");
+  function showLang(k, anim){
+    var L = LANGS[k]; $$(".lang").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.k === k); });
+    $("#lgm").textContent = L.m; $("#lgt").textContent = L.t; $("#lgd").textContent = L.d;
+    if (anim){ lgbox.classList.remove("swap"); void lgbox.offsetWidth; lgbox.classList.add("swap"); }
+  }
+  showLang("fil", false);
+  $("#langs").addEventListener("click", function(e){ var b = e.target.closest(".lang"); if (b){ play("tab", $$(".lang").indexOf(b)); showLang(b.dataset.k, true); } });
 
   /* ---------- skills ---------- */
   var cats = {all:{label:"Everything",note:"All twelve, from the bench to the network."},hw:{label:"Hardware",note:"I like opening machines up and putting them back together."},sw:{label:"Software",note:"Getting a computer from blank drive to ready to use."},net:{label:"Network",note:"Connecting machines, from the cable to the configuration."},sup:{label:"Support",note:"Finding what's wrong, fixing it, and keeping data safe."}};
