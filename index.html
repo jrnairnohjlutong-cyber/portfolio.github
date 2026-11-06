@@ -287,8 +287,8 @@ button.lang{background:transparent;color:inherit;cursor:pointer;font-family:inhe
   .symptoms{grid-template-columns:1fr 1fr}
   .sym{padding:.65rem .9rem;font-size:.84rem}.sym span{display:none}
   .facts{grid-template-columns:1fr 1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .stats{grid-template-columns:repeat(4,1fr)}.stat{padding:.6rem .5rem}.fact{padding:.7rem .9rem;border-radius:18px}.fact div{font-size:.84rem}
+  .stat:nth-child(2){border-right:1px solid var(--line)}.stat:nth-child(-n+2){border-bottom:0}.stat:last-child{border-right:0}
   .chips{grid-template-columns:1fr 1fr}
   .skill{padding-right:.7rem}.skill .ic{min-width:32px;height:32px;font-size:.54rem}.skill span{font-size:.78rem}
 }
@@ -341,7 +341,7 @@ button.lang{background:transparent;color:inherit;cursor:pointer;font-family:inhe
           <div>
             <div class="greet" data-s style="--i:0">
               <span class="gw" id="gw" aria-live="polite"><b>Hello.</b></span>
-              <span class="gs">Welcome to my portfolio. Pick a menu to explore.</span>
+              <span class="gs">Welcome to my portfolio. Tap a menu to explore.</span>
             </div>
             <h1 data-s style="--i:1"><span>John Rain</span><span class="cu">Lutong.</span></h1>
             <p class="role" data-s style="--i:2"><span id="role">BS Computer Science student</span><i class="caret"></i></p>
@@ -374,20 +374,22 @@ button.lang{background:transparent;color:inherit;cursor:pointer;font-family:inhe
           <button type="button" role="tab" data-rip data-t="facts" aria-selected="false">Facts</button>
         </div>
         <div class="pane on" data-pane="story"><div class="card" data-p style="--i:0">
-          <p class="big">Hi! I'm John Rain B. Lutong, a BS Computer Science student at the University of the Cordilleras.</p>
-          <p>My interest in technology started when I studied Computer Systems Servicing at Tadian School of Arts and Trades, where I learned the basics of computers, hardware, and troubleshooting.</p>
+          <p class="big">Hi, I'm John Rain B. Lutong, 18 years old and a BS Computer Science student at the University of the Cordilleras.</p>
+          <p>My love for technology began at Tadian School of Arts and Trades, where I studied Computer Systems Servicing and learned the basics of computers, hardware, and troubleshooting.</p>
         </div></div>
         <div class="pane" data-pane="goals"><div class="card" data-p style="--i:0">
-          <p class="big">I want to improve my skills, explore new ideas, and create solutions that make everyday tasks easier.</p>
-          <p>I chose Computer Science because I enjoy learning about technology and discovering how things work.</p>
-          <p>I know that learning takes time and every experience comes with challenges. I see each one as a chance to improve, gain knowledge, and become better at what I do. This portfolio showcases what I have learned, the skills I have developed, and the goals I hope to achieve as I continue my journey in the world of technology.</p>
+          <p class="big">I want to sharpen my skills, explore new ideas, and build solutions that make everyday tasks easier.</p>
+          <p>I chose Computer Science because I love learning about technology and finding out how things really work.</p>
+          <p>Learning takes time, and every experience brings challenges. I treat each one as a chance to grow and do better. This portfolio shows what I have learned, the skills I have built, and the goals I'm working toward in the world of technology.</p>
         </div></div>
         <div class="pane" data-pane="facts">
           <div class="facts">
-            <div class="fact" data-p style="--i:0"><small>Studying now</small><div>BS Computer Science, University of the Cordilleras</div></div>
-            <div class="fact" data-p style="--i:1"><small>Where it started</small><div>Computer Systems Servicing, Tadian School of Arts and Trades</div></div>
-            <div class="fact" data-p style="--i:2"><small>First real workplace</small><div>Work immersion at Luis Hora Memorial Hospital</div></div>
-            <div class="fact" data-p style="--i:3"><small>Where I'm headed</small><div>Exploring technology and building my skills toward my future career</div></div>
+            <div class="fact" data-p style="--i:0"><small>Born</small><div>January 20, 2008</div></div>
+            <div class="fact" data-p style="--i:0"><small>Studying now</small><div>BS Computer Science</div></div>
+            <div class="fact" data-p style="--i:1"><small>Started with</small><div>Computer Systems Servicing</div></div>
+            <div class="fact" data-p style="--i:2"><small>First workplace</small><div>Work immersion, Luis Hora Memorial Hospital</div></div>
+            <div class="fact" data-p style="--i:3"><small>Heading to</small><div>Exploring tech and growing my skills</div></div>
+            <div class="fact" data-p style="--i:4"><small>Languages</small><div>Filipino, English, Ilocano, Kankana-ey</div></div>
           </div>
           <div class="stats" data-p style="--i:4">
             <div class="stat"><b data-count="12">12</b><span>Hands-on skills</span></div>
@@ -451,7 +453,7 @@ button.lang{background:transparent;color:inherit;cursor:pointer;font-family:inhe
           <button type="button" role="tab" data-rip data-t="lang" aria-selected="false">Languages</button>
         </div>
         <div class="pane on" data-pane="cert"><div class="card" data-p style="--i:0"><p class="label">Certification · 2025</p><h3>Computer Systems Servicing NC II</h3><p>Certified in 2025.</p></div></div>
-        <div class="pane" data-pane="exp"><div class="card" data-p style="--i:0"><p class="label">Experience</p><h3>Work Immersion</h3><p>Luis Hora Memorial Hospital</p><ul class="bl"><li>Gained practical experience in a workplace environment.</li><li>Assisted with basic computer setup, installation, and technical tasks.</li></ul></div></div>
+        <div class="pane" data-pane="exp"><div class="card" data-p style="--i:0"><p class="label">Experience</p><h3>Work Immersion</h3><p><b>Luis Hora Memorial Hospital</b></p><ul class="bl"><li>Gained hands-on experience in a real workplace.</li><li>Helped with basic computer setup, installation, and technical tasks.</li></ul></div></div>
         <div class="pane" data-pane="lang"><div class="card">
           <p class="label" data-p style="--i:0">Languages I speak · tap one to read its origin</p>
           <div class="langs" id="langs" data-p style="--i:1">
@@ -470,7 +472,7 @@ button.lang{background:transparent;color:inherit;cursor:pointer;font-family:inhe
         <p class="label" data-s style="--i:0">Get in touch</p>
         <h2 class="vt" data-s style="--i:1">Let's build something.</h2>
         <div class="card" data-s style="--i:2">
-          <p class="lead" style="margin:0">If you have a project, an opportunity, or just a question about my work, I'd be glad to hear from you.</p>
+          <p class="lead" style="margin:0">Have a project, an opportunity, or a question about my work? I'd be glad to hear from you. Send me a message on Facebook.</p>
           <div class="cta"><a class="btn pri" id="fb" href="#contact" data-rip>Facebook · John Rain Lutong</a><button class="btn" type="button" data-go="home" data-rip>Back to menu</button></div>
         </div>
       </div>
